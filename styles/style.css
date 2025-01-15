@@ -1,19 +1,82 @@
-/*
-Not pixel perfect, but looks pretty similar :D
+@charset "utf-8";
 
+/*
+All rights go to ROBLOX.
+This replica is for educational purposes only to practice
+CSS.
+
+Not pixel perfect, but looks pretty similar :D
 */
 
+/* CSS Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Fonts */
 body {
-
+    font-family: Arial;
 }
 
-header menu.navbar {
+/* Page styling */
+.flexible-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    /*
+        unshrinkable items can't shrink so they will overflow if needed
+        flex-grow allows <main> to take up all available space.
+        once there's no more space, why doesn't it shrink to fit within
+        the primary axis?
+    */
+    header {
+        flex-shrink: 0;
+        /* flex-grow defaults to 0 */
+    }
+    main {
+        padding: 2em 0;
+        background-color: #9Ec3E7;
+        /* [q] why does a small fixed height w/ flex-grow make the footer
+        overlap main?
+        [a] because the content overflows main's content box. the footer is
+        below main's box, but the overflowed content overflows under the footer.
+            (more apparent if a background color is set) */
+        
+        /* flex-grow will grow main to fill available free space.
+        if there's no free space, main will overflow the container if its box can't
+        be shrunk.
+        [q] why can't main shrink if there's no free space?
+            [a] because that would mean the content of main overflowing the content box
+        [q] why is padding included in the box which isn't allowed to overflow?
+            [a] flex-basis will default to min-content if no primary-axis
+            length (width/height) is defined for a flex child.
+            so the items will overflow if the number of items along a line can't
+            be shrunk (and they can't if there's no hypothetical main size),
+            so they overflow. this is why main overflows when lots of content is added.
+            it has no main-size defined (just auto), and yeah.
+            flex-shrink has no effect since there's flex-grow + can't shrink
+            min-content + no user-defined hypothetical main size defined (just auto which
+                defaults to min-content).
+            
+            i guess padding is also included in content size? so it's just box then.
+            still don't know why exactly...
+            
+        and why does height allow for its contents to overflow? */
+        flex-grow: 1;
+        /* flex-shrink defaults to 1 */
+    }
+    footer {
+        flex-shrink: 0;
+        /* flex-grow defaults to 0 */
+        background-color: grey;
+    }
+}
+
+header .navbar {
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -32,7 +95,10 @@ header menu.navbar {
         align-items: center;
         list-style-type: none;
         
-        &:has(a:hover) {
+        color: #9Ec3E7;
+        font-size: 13px;
+        
+        &:not(.sign-up):has(a:hover) {
             background: rgb(139,168,211);
             background: linear-gradient(180deg, rgba(139,168,211,1) 0%, rgba(18,63,131,1) 100%); 
         }
@@ -63,5 +129,60 @@ header menu.navbar {
     
     .ml-auto {
         margin-left: 17.6em;
+    }
+    
+    .login-dropdown {
+        flex-shrink: 0;
+        margin-left: .9em;
+        
+        & button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 60px;
+            height: 25px;
+            padding: 0 0.438em;
+            border-radius: 0;
+            
+            border: 0;
+            border: 1px solid #777;
+            
+            background: rgb(226,226,226);
+            background: linear-gradient(356deg, rgba(226,226,226,1) 0%, rgba(255,255,255,1) 100%);
+            
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            
+            &:hover {
+                cursor: pointer;
+                background: rgb(255,255,255);
+                background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,216,255,1) 100%); 
+            }
+        }
+    }
+    
+    /* Components */
+    /* do a psuedo element for this to make it a true self-contained component */
+    & .arrow-icon::after {
+        content: "▼";
+        font-size: 12px;
+        width: auto;
+        height: auto;
+        margin-left: .1em;
+    }
+    
+    & .arrow-icon--small::after {
+        font-size: 9px;
+        padding-top: .4em;
+        padding-left: .1em;
+    }
+    
+    & .color-white {
+        color: white;
+    }
+    
+    & .color-grey {
+        color: #666;
     }
 }
