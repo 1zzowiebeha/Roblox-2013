@@ -6,6 +6,12 @@ This replica is for educational purposes only to practice
 CSS.
 
 Not pixel perfect, but looks pretty similar :D
+
+Pixel perfection:
+correct gradient for header anchors
+use an image on logo hover
+use an image for header background gradient
+pixel perfect spacing and font sizing
 */
 
 /* CSS Reset */
@@ -128,44 +134,50 @@ header .navbar {
     }
     
     .ml-auto {
-        margin-left: 17.6em;
+        margin-left: 19.6em;
     }
     
     .login-dropdown {
         flex-shrink: 0;
         margin-left: .9em;
-        
-        & button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    }
+    
+    .login-dropdown__login-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-            width: 60px;
-            height: 25px;
-            padding: 0 0.438em;
-            border-radius: 0;
-            
-            border: 0;
-            border: 1px solid #777;
-            
-            background: rgb(226,226,226);
-            background: linear-gradient(356deg, rgba(226,226,226,1) 0%, rgba(255,255,255,1) 100%);
-            
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            
-            &:hover {
-                cursor: pointer;
-                background: rgb(255,255,255);
-                background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,216,255,1) 100%); 
-            }
+        box-sizing: content-box;
+        width: 62px;
+        height: 25px;
+        padding: 0 7px;
+        border-radius: 0;
+        
+        border: 0;
+        border: 1px solid #777;
+        
+        background: rgb(226,226,226);
+        background: linear-gradient(356deg, rgba(226,226,226,1) 0%, rgba(255,255,255,1) 100%);
+        
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        
+        &:hover {
+            cursor: pointer;
+            background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(203,216,255,1) 100%); 
         }
     }
     
-    /* Components */
-    /* do a psuedo element for this to make it a true self-contained component */
+    /* ==============
+    Header Components 
+    ================= */
+    
+    /* Header Icons */
     & .arrow-icon::after {
         content: "▼";
+        /* if we want to apply top padding, change display to a block variant. inline default
+        will disregard padding-top. */
         font-size: 12px;
         width: auto;
         height: auto;
@@ -178,6 +190,7 @@ header .navbar {
         padding-left: .1em;
     }
     
+    /* Header Utilities */
     & .color-white {
         color: white;
     }
@@ -185,4 +198,28 @@ header .navbar {
     & .color-grey {
         color: #666;
     }
+}
+
+/* generic button can apply to anything sensible: <a>, <button>, <input> */
+/* ==============
+Content Components 
+================= */
+
+.login-widget {
+    
+}
+
+/* Content Utilities */
+/* move all the utilities outside of nested styles after it's all done to make
+it into a cool Roblox UI Framework!! */
+
+main {
+    .flex {
+        display: flex;
+        
+        > .row {
+            
+        }
+    }
+    
 }
